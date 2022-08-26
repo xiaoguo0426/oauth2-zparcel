@@ -1,0 +1,13 @@
+{
+    "name": "onetech\/oauth2-zparcel",
+    "description": "Package description here.",
+    "license": "MIT",
+    "require": {
+        "league/oauth2-client": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onetech\\Oauth2Zparcel\\": "src"
+        }
+    }
+}
