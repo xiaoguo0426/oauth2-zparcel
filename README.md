@@ -11,7 +11,35 @@ $ composer require onetech/oauth2-zparcel -vvv
 
 ## Usage
 
-TODO
+```
+$provider = new \Onetech\Oauth2Zparcel\Provider\Zparcel([
+    'appId' => 'your appId',
+    'clientId' => 'your clientId',
+    'clientSecret' => 'your clientSecret',
+    'redirectUri' => 'your redirectUri'
+]);
+//生成授权url
+echo $provider->getAuthorizationUrl([
+        'state' => mt_rand(10000, 99999),
+        'version' => 'draft'
+    ]) . PHP_EOL;
+
+//授权成功后，浏览器回跳地址中的参数spapi_oauth_code值
+try {
+    $oauth = $provider->getAccessToken('authorization_code', [
+        'code' => $_GET['spapi_oauth_code']
+    ]);
+    var_dump($oauth->getToken());
+    var_dump($oauth->getRefreshToken());
+    var_dump($oauth->getExpires());
+
+    //    $token = $provider->getAccessToken('refresh_token', [
+    //        'refresh_token' => ''
+    //    ]);
+    //    echo $token;
+} catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
+}
+```
 
 ## Contributing
 

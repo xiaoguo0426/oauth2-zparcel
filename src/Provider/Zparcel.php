@@ -15,11 +15,11 @@ class Zparcel extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
-    protected $app_id;
+    protected $appId;
 
     public function getBaseAuthorizationUrl()
     {
-        return sprintf('https://ship.amazon.cn/freight-puma/spectrum/consent/%s', $this->app_id);
+        return sprintf('https://ship.amazon.cn/freight-puma/spectrum/consent/%s', $this->appId);
     }
 
     public function getBaseAccessTokenUrl(array $params)
