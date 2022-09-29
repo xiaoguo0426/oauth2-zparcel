@@ -39,7 +39,16 @@ class Zparcel extends AbstractProvider
 
     protected function checkResponse(ResponseInterface $response, $data)
     {
-        // TODO: Implement checkResponse() method.
+        if (isset($data['error'])) {
+            $statusCode = $response->getStatusCode();
+            $error = $data['error'];
+            $errorDescription = $data['error_description'];
+            throw new IdentityProviderException(
+                $statusCode . ' - ' . $errorDescription . ': ' . $error,
+                $response->getStatusCode(),
+                $response->getBody()->getContents()
+            );
+        }
     }
 
     protected function createResourceOwner(array $response, AccessToken $token)
